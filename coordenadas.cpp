@@ -16,6 +16,14 @@ void error(); //funcion que evita errores de ingreso de datos
 class Coord //clase coord servira para crear, manipular y mostrar los datos de la cola
 {
     private:
+
+        struct coor //estructura de datos de coor que contiene las coordenadas de x, y, z
+        {
+            //declaracion de vector con 3 elementos que servira para almacenar las coordenadas de x, y, z
+            int vector[3];
+
+        };
+
         //declaracion de variables con accesos privados para solo utilizarlos dentro de la clase
         int opcion;
         int seguir;
@@ -26,16 +34,11 @@ class Coord //clase coord servira para crear, manipular y mostrar los datos de l
         double PromZ = 0.00;
         double n = 0.00;
 
-    public:
-
-        struct coor //estructura de datos de coor que contiene las coordenadas de x, y, z
-        {
-            //declaracion de vector con 3 elementos que servira para almacenar las coordenadas de x, y, z
-            int vector[3];
-
-        };
+    public: 
 
         //metodos o funciones de la clase Coord se utilizara para manejar la cola
+        Coord();
+        ~Coord();
         void menu();
         void ingresar();
         void mostrar();
@@ -47,14 +50,14 @@ class Coord //clase coord servira para crear, manipular y mostrar los datos de l
         queue<coor> colas; //nodo de tipo de tipo coor
 };
 
-int main()
+Coord::Coord() //constructor que sera usado para reservar espacio en la memoria para los nodos de la cola
 {
-    Coord obj; //objeto de tipo Coord
 
-    obj.menu(); //metodo menu de la clase Coord
+}
 
-    system("pause");
-    return 0;
+Coord::~Coord() //destructor que sera usado para liberar espacio en la memoria
+{
+
 }
 
 void Coord::menu() //metodo de la clase Coord este contendra el menu del programa
@@ -62,7 +65,7 @@ void Coord::menu() //metodo de la clase Coord este contendra el menu del program
 
     system("color 4D"); //funcion que agrega color al fondo y letra de la consola de comandos
 
-    Coord obj; //bojeto de tipo Coord
+    Coord *obj = new Coord(); //se reserva espacion en la memoria
 
     do { //ciclo do - while permite seguir en el programa y evita errores de ingreso de datos
 
@@ -105,15 +108,15 @@ void Coord::menu() //metodo de la clase Coord este contendra el menu del program
         {
             case 1:
 
-                obj.ingresar(); //objeto que accede al metodo ingresar
+                obj->ingresar(); //objeto que accede al metodo ingresar mediante el operador de seleccion
                 break;
             case 2:
 
-                obj.mostrar(); //objeto que accede al metodo mostrar
+                obj->mostrar(); //objeto que accede al metodo mostrar mediante el operador de seleccion
                 break;
             case 3:
 
-                obj.datos(); //objeto que accede al metodo datos
+                obj->datos(); //objeto que accede al metodo datos mediante el operador de seleccion
                 break;
             case 4:
 
@@ -243,6 +246,20 @@ void Coord::datos() //metodo que muestra tales como el promedio de x, y, z y el 
 
     system("pause");
 
+}
+
+
+/*Funcion principal
+===================
+*/
+int main()
+{
+    Coord obj; //objeto de tipo Coord
+
+    obj.menu(); //metodo menu de la clase Coord
+
+    system("pause");
+    return 0;
 }
 
 /*Funcion gotoxy permite colocar los texto a cualquier lugar de la pantalla contiene dos parametros enteros
